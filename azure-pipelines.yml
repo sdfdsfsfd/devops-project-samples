@@ -6,17 +6,20 @@ steps:
     then
         dotnet build extensions.csproj --output ./bin
     fi
-    cd $(Agent.BuildDirectory)/node/plain/functionApp/Tests
+    ls -l
+    pwd
+    echo $(Agent.BuildDirectory)
+    #cd $(Agent.BuildDirectory)/node/plain/functionApp/Tests
     npm install 
     npm run build --if-present
     npm prune --production
-- task: ArchiveFiles@2
+#- task: ArchiveFiles@2
   displayName: "Archive files"
   inputs:
     rootFolderOrFile: "$(System.DefaultWorkingDirectory)"
     includeRootFolder: false
     archiveFile: "$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip"
-- task: PublishBuildArtifacts@1
+#- task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip'
     artifactName: 'drop'
