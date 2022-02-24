@@ -6,6 +6,7 @@ steps:
     then
         dotnet build extensions.csproj --output ./bin
     fi
+    cd $(Agent.BuildDirectory)/node/plain/functionApp/Tests
     npm install 
     npm run build --if-present
     npm prune --production
