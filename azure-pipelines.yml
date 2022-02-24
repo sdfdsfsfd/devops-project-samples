@@ -21,3 +21,25 @@ steps:
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip'
     artifactName: 'drop'
+
+trigger:
+- main
+
+variables:
+  # Azure service connection established during pipeline creation
+  #azureSubscription: Pay-As-You-Go (40783f5c-2558-41a9-a5af-97b47669376e)
+  appName: mohasin
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+- task: AzureFunctionApp@1 # Add this at the end of your file
+  inputs:
+    azureSubscription: Pay-As-You-Go (40783f5c-2558-41a9-a5af-97b47669376e)
+    appType: functionAppLinux # default is functionApp
+    appName: $(appName)
+    package: $(System.ArtifactsDirectory)/**/*.zip
+    #Uncomment the next lines to deploy to a deployment slot
+    #Note that deployment slots is not supported for Linux Dynamic SKU
+    #deployToSlotOrASE: true
+    #resourceGroupName: '<Resource Group Name>'
+    #slotName: '<Slot name>'
