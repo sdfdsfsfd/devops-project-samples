@@ -34,7 +34,7 @@ steps:
     azureSubscription: Pay-As-You-Go (40783f5c-2558-41a9-a5af-97b47669376e)
     appType: functionAppLinux # default is functionApp
     appName: mohasinfunc
-    package: $(System.ArtifactsDirectory)/**/*.zip
+    package: $(System.DefaultWorkingDirectory)/*.zip
     #Uncomment the next lines to deploy to a deployment slot
     #Note that deployment slots is not supported for Linux Dynamic SKU
     #deployToSlotOrASE: true
